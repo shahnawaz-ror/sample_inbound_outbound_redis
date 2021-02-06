@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  Invalid_user_name_password: "Invalid user name or password."
