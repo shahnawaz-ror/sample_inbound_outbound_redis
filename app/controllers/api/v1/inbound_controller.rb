@@ -6,10 +6,14 @@ class Api::V1::InboundController < ApplicationController
 	before_action :check_text
 	before_action :check_to_exists
 	def sms
+		redis = Redis.new(host: "localhost")
+		if params[:text] == "STOP"
+			redis.set("#{@account.username+"_#{params[:from]}/#{params[:to]}"}","#{params[:from]}/#{params[:to]}",ex: 4.hours)
+		end
 		render json: 
 			{
 				response_code: 200,
-				response_message: 'Thanks'
+				response_message: 'inbound sms ok'
 			}
 	end
 
@@ -23,7 +27,6 @@ class Api::V1::InboundController < ApplicationController
 				response_code: 403,
 				response_message: "#{I18n.t 'To_is_missing'}"
 			}
-			return
 		end	
 	end
 end
