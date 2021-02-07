@@ -4,27 +4,26 @@ class Api::V1::InboundController < ApplicationController
 	#Inbound sms need to authenticate first
 	def sms
 		logger.info "#{ENV.fetch("REDIS_URL")}"
-		# redis = Redis.new(host: ENV.fetch("REDIS_URL"))
 		redis = Redis.current
 		if ["STOP","STOP\n","STOP\r", "STOP\r\n"].include? params[:text]
 			redis.set("#{@account.username+"_#{params[:from]}/#{params[:to]}"}","#{params[:from]}/#{params[:to]}",ex: 4.hours)
 		end
 		render json: 
-			{
-				response_code: 200,
-				response_message: "#{I18n.t 'Inbound_ok'}"
-			}
+		{
+			response_code: 200,
+			response_message: "#{I18n.t 'Inbound_ok'}"
+		}
 	end
 
 	private
-		def check_to_exists
-			account_number = @account.phone_numbers.find_by(number: params[:to]) rescue nil
-			unless account_number.present?
-				render json: 
-				{
-					response_code: 403,
-					response_message: "#{I18n.t 'To_is_missing'}"
-				}
-			end	
-		end
+	def check_to_exists
+		account_number = @account.phone_numbers.find_by(number: params[:to]) rescue nil
+		unless account_number.present?
+			render json: 
+			{
+				response_code: 403,
+				response_message: "#{I18n.t 'To_is_missing'}"
+			}
+		end	
+	end
 end
