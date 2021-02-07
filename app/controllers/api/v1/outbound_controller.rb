@@ -2,7 +2,7 @@ class Api::V1::OutboundController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	before_action :authenticate_user,:check_parameters_present, :check_from, :check_to, :check_text, :check_from_exists
 	def sms
-		redis = Redis.new(host: "localhost")
+		redis = Redis.new(host: ENV.fetch("REDIS_URL"))
 		redis_data = redis.get("#{@account.username+"_#{params[:from]}/#{params[:to]}"}")
 		if redis_data
 			data = redis.get("#{params[:from]}") rescue 0
