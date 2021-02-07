@@ -6,5 +6,15 @@ Rails.application.routes.draw do
       post '/outbound/sms' => 'outbound#sms'
     end
   end
+  resources :apidocs, only: [:index] do
+    collection do
+      get 'swagger_ui'
+    end
+  end
+  # resources :apidocs2, only: [:index] do
+  #   collection do
+  #     get 'swagger_ui'
+  #   end
+  # end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
