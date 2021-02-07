@@ -7,8 +7,8 @@ class Api::V1::OutboundController < ApplicationController
 		if redis_data
 			data = redis.get("#{params[:from]}") rescue 0
 			data = data.to_i
-			redis.set("#{params[:from]}", data.to_i + 1)
-			if data < 10
+			redis.set("#{params[:from]}", data.to_i + 1, ,ex: 24.hours)
+			if data < 50
 				render json: 
 				{
 					response_code: 200,
@@ -28,7 +28,7 @@ class Api::V1::OutboundController < ApplicationController
 				response_message: "#{I18n.t 'Unknown_failure'}"
 			}
 		end
-		
+
 	end
 	private
 	def check_from_exists
