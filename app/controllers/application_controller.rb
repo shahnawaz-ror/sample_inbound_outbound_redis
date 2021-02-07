@@ -63,4 +63,31 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def check_parameters_present
+		if params[:from].nil?
+			render json: 
+			{
+				response_code: 403,
+				response_message: "from #{I18n.t 'Parameter_is_missing'}"
+			}
+			return
+		end
+		if params[:to].nil?
+			render json: 
+			{
+				response_code: 403,
+				response_message: "to #{I18n.t 'Parameter_is_missing'}"
+			}
+			return
+		end
+		if params[:text].nil?
+			render json: 
+			{
+				response_code: 403,
+				response_message: "text #{I18n.t 'Parameter_is_missing'}"
+			}
+			return
+		end
+	end
+
 end

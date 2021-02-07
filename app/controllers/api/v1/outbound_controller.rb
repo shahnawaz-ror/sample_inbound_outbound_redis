@@ -1,10 +1,6 @@
 class Api::V1::OutboundController < ApplicationController
 	skip_before_action :verify_authenticity_token
-	before_action :authenticate_user
-	before_action :check_from
-	before_action :check_to
-	before_action :check_text
-	before_action :check_from_exists
+	before_action :authenticate_user,:check_parameters_present, :check_from, :check_to, :check_text, :check_from_exists
 	def sms
 		redis = Redis.new(host: "localhost")
 		redis_data = redis.get("#{@account.username+"_#{params[:from]}/#{params[:to]}"}")
