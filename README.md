@@ -29,6 +29,7 @@ Live application sample link is
 https://enigmatic-gorge-24669.herokuapp.com/
 
 Sample API call for Inbound sms
+```
 
 require 'uri'
 require 'net/http'
@@ -48,9 +49,10 @@ request.body = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: 
 
 response = http.request(request)
 puts response.read_body
-
+```
 
 Sample API call for OutBound 
+```
 
 require 'uri'
 require 'net/http'
@@ -70,5 +72,6 @@ request.body = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: 
 
 response = http.request(request)
 puts response.read_body
+```
 
 * ...
