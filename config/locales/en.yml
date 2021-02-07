@@ -35,3 +35,7 @@ en:
   To_is_missing: "to parameter not found"
   From_is_missing: 'from parameter not found'
   Parameter_is_missing: 'is missing'
+  Limit_reached: 'limit reached for from'
+  Unknown_failure: 'unknown failure'
+  Outbound_ok: 'outbound sms ok'
+  Inbound_ok: 'inbound sms ok'
