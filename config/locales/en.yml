@@ -39,3 +39,5 @@ en:
   Unknown_failure: 'unknown failure'
   Outbound_ok: 'outbound sms ok'
   Inbound_ok: 'inbound sms ok'
+  Invalid_to_number: 'to is invalid'
+  Invalid_text_length: 'Invalid text length min 1 and maximum 120'
